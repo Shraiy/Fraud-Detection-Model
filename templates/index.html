@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Fraud Detection Application</h1>
+        <form action="/predict" method="post">
+            <div class="form-group">
+                <label for="step">Step:</label>
+                <input type="text" name="step" required>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="text" name="amount" required>
+            </div>
+
+            <div class="form-group">
+                <label for="oldbalanceOrg">Old Balance Origin:</label>
+                <input type="text" name="oldbalanceOrg" required>
+            </div>
+
+            <div class="form-group">
+                <label for="newbalanceOrig">New Balance Origin:</label>
+                <input type="text" name="newbalanceOrig" required>
+            </div>
+
+            <div class="form-group">
+                <label for="oldbalanceDest">Old Balance Destination:</label>
+                <input type="text" name="oldbalanceDest" required>
+            </div>
+
+            <div class="form-group">
+                <label for="newbalanceDest">New Balance Destination:</label>
+                <input type="text" name="newbalanceDest" required>
+            </div>
+
+            <div class="form-group">
+                <label for="type">Payment Type:</label>
+                <select name="type_PAYMENT" id="type" required>
+                    <option value="CASH_IN">CASH_IN</option>
+                    <option value="CASH_OUT">CASH_OUT</option>
+                    <option value="DEBIT">DEBIT</option>
+                    <option value="TRANSFER">TRANSFER</option>
+                    <option value="PAYMENT">PAYMENT</option>
+                </select>
+            </div>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        <h2 class="prediction">
+            Prediction: 
+            {% if prediction is not none %}
+                {{ 'Fraud' if prediction == 1 else 'Not Fraud' }}
+            {% else %}
+                None
+            {% endif %}
+        </h2>
+    </div>
+    <footer>
+        <p>&copy; 2024 Shraiy Khaddar</p>
+    </footer>
+</body>
+</html>
